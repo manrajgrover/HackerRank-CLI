@@ -2,9 +2,11 @@
   "name": "hackerrank-cli",
   "version": "1.0.0",
   "description": "HackerEarth Node CLI for running and compiling code",
-  "main": "cli.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "hackerrank": "cli.js"
   },
   "repository": {
     "type": "git",
@@ -21,7 +23,6 @@
   "homepage": "https://github.com/ManrajGrover/HackerRank-CLI#readme",
   "dependencies": {
     "chalk": "1.1.3",
-    "commander": "2.9.0",
     "ora": "0.2.3",
     "request": "2.72.0"
   }
