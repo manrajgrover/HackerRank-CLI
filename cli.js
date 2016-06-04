@@ -4,7 +4,7 @@
 * @Author: Manraj Singh
 * @Date:   2016-05-26 21:51:20
 * @Last Modified by:   Manraj Singh
-* @Last Modified time: 2016-06-04 15:10:43
+* @Last Modified time: 2016-06-05 00:31:02
 */
 
 'use strict';
@@ -14,13 +14,14 @@ const fs = require('fs');
 const ora = require('ora');
 const chalk = require('chalk');
 const request = require('request');
+const Table = require('cli-table');
 const config = require('./config');
 
 const RUN_URL = 'http://api.hackerrank.com/checker/submission.json';
 
 const argv = yargs
   .usage('$0 <command>')
-  .command('run', 'Run code on HackerRank server', function(yargs){
+  .command('run', 'Run code on HackerRank server', (yargs) => {
     argv = yargs
       .usage('Usage: $0 run <options>')
       .demand(['s', 'i', 'o'])
@@ -31,7 +32,7 @@ const argv = yargs
       .example('$0 run -s A.cpp -i Input00.in -o Output.txt -l CPP')
       .argv;
   })
-  .command('config', 'Change config file', function(yargs){
+  .command('config', 'Change config file', (yargs) => {
     var argv = yargs
       .usage('Usage: $0 config [options]')
       .alias('l', 'list').describe('l', 'List language and their code').boolean('l')
@@ -40,11 +41,18 @@ const argv = yargs
 
     if (argv.list){
       const spinner = ora('Getting languages').start();
-      request('http://api.hackerrank.com/checker/languages.json', (error, response, body)=> {
+      request('http://api.hackerrank.com/checker/languages.json', (error, response, body) => {
         if (!error && response.statusCode === 200) {
-          var languages = JSON.parse(body)
+          var languages = JSON.parse(body), names = languages.languages.names;
           spinner.stop();
-          console.log(languages);
+          var table = new Table({
+            head: ['Language', 'Code'],
+            colWidths: [25, 25]
+          });
+          for(let name in names){
+            table.push([names[name], name]);
+          }
+          console.log(table.toString());
         } else {
           spinner.stop();
           console.log(error);
