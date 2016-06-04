@@ -4,7 +4,7 @@
 * @Author: Manraj Singh
 * @Date:   2016-05-26 21:51:20
 * @Last Modified by:   Manraj Singh
-* @Last Modified time: 2016-06-04 11:30:01
+* @Last Modified time: 2016-06-04 11:51:59
 */
 
 'use strict';
@@ -29,12 +29,19 @@ const argv = yargs
   .usage('$0 <command>')
   .command('run', 'Run code on HackerRank server', function(yargs){
     argv = yargs
-      .usage(chalk.blue('usage: $0 run <options>'))
-      .demand(['s', 'i', 'l', 'o'])
-      .example('$0 run -s CodeJamA.cpp -i Input00.in -o Output.txt -l CPP')
+      .usage(chalk.green('usage: $0 run <options>'))
+      .demand(['s', 'i', 'o'])
+      .alias('s', 'source').describe('s', 'Source Code file path')
+      .alias('i', 'input').describe('i', 'Input file path')
+      .alias('l', 'language').describe('l', 'Language')
+      .alias('o', 'output').describe('o', 'Output file path')
+      .example('$0 run -s A.cpp -i Input00.in -o Output.txt -l CPP')
   })
   .command('config', 'Change config file', function(yargs){
-
+    argv = yargs
+      .usage(chalk.green('usage: $0 config [options]'))
+      .alias('l', 'language').describe('l', 'List language codes')
+      .example('$0 config -l')
   })
   .help('h')
   .alias('h', 'help')
