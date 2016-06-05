@@ -4,7 +4,7 @@
 * @Author: Manraj Singh
 * @Date:   2016-05-26 21:51:20
 * @Last Modified by:   Manraj Singh
-* @Last Modified time: 2016-06-05 21:42:31
+* @Last Modified time: 2016-06-06 00:51:56
 */
 
 'use strict';
@@ -23,7 +23,7 @@ const RUN_URL = 'http://api.hackerrank.com/checker/submission.json';
 const argv = yargs
   .usage('$0 <command>')
   .command('run', 'Run code on HackerRank server', (yargs) => {
-    argv = yargs
+    var argv = yargs
       .usage('Usage: $0 run <options>')
       .demand(['s', 'i', 'o'])
       .alias('s', 'source').describe('s', 'Source Code file path')
@@ -32,7 +32,25 @@ const argv = yargs
       .alias('o', 'output').describe('o', 'Output file path')
       .example('$0 run -s A.cpp -i Input00.in -o Output.txt -l CPP')
       .argv;
-
+    const spinner = ora('Running').start();
+    var lang = config.default_lang;
+    var source = 'print "Hello World"';
+    var data = {
+      'api_key': config.api_key,
+      'source': source,
+      'lang': parseInt(lang),
+      'testcases': '["1", "1"]'
+    };
+    request.post({ url : RUN_URL, form : data}, function(err,response){
+      if(err){
+        spinner.stop();
+        console.log('Error');
+      }
+      else{
+        spinner.stop();
+        console.log(JSON.stringify(response.body, null, 2));
+      }
+    });
   })
   .command('config', 'Change config file', (yargs) => {
     var argv = yargs

@@ -1,7 +1,7 @@
 {
   "name": "hackerrank-cli",
   "version": "1.0.0",
-  "description": "HackerEarth Node CLI for running and compiling code",
+  "description": "HackerRank Node CLI for running and compiling code",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
