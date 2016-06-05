@@ -4,12 +4,13 @@
 * @Author: Manraj Singh
 * @Date:   2016-05-26 21:51:20
 * @Last Modified by:   Manraj Singh
-* @Last Modified time: 2016-06-05 00:31:02
+* @Last Modified time: 2016-06-05 19:50:00
 */
 
 'use strict';
 
 const yargs = require('yargs');
+const inquirer = require('inquirer');
 const fs = require('fs');
 const ora = require('ora');
 const chalk = require('chalk');
@@ -31,6 +32,7 @@ const argv = yargs
       .alias('o', 'output').describe('o', 'Output file path')
       .example('$0 run -s A.cpp -i Input00.in -o Output.txt -l CPP')
       .argv;
+
   })
   .command('config', 'Change config file', (yargs) => {
     var argv = yargs
@@ -57,6 +59,23 @@ const argv = yargs
           spinner.stop();
           console.log(error);
         }
+      });
+    }
+    else{
+      const questions = [
+        {
+          type: 'input',
+          name: 'api_key',
+          message: 'Enter API Key <leave blank incase unchanged>'
+        },
+        {
+          type: 'input',
+          name: 'default_lang',
+          message: 'Enter default language code (Run `hackerrank config -l` to list codes)'
+        }
+      ];
+      inquirer.prompt(questions).then(function(answers){
+        console.log(JSON.stringify(answers));
       });
     }
   })
