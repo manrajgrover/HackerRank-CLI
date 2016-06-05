@@ -4,7 +4,7 @@
 * @Author: Manraj Singh
 * @Date:   2016-05-26 21:51:20
 * @Last Modified by:   Manraj Singh
-* @Last Modified time: 2016-06-05 20:48:33
+* @Last Modified time: 2016-06-05 21:42:31
 */
 
 'use strict';
@@ -74,7 +74,7 @@ const argv = yargs
           message: 'Enter default language code (Run `hackerrank config -l` to list codes)'
         }
       ];
-      inquirer.prompt(questions).then(function(answers){
+      inquirer.prompt(questions).then((answers) => {
         var obj = config;
         if (answers.api_key !== ''){
           obj.api_key = answers.api_key;
