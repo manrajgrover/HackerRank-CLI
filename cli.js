@@ -4,7 +4,7 @@
 * @Author: Manraj Singh
 * @Date:   2016-05-26 21:51:20
 * @Last Modified by:   Manraj Singh
-* @Last Modified time: 2016-06-06 14:16:39
+* @Last Modified time: 2016-06-06 14:23:14
 */
 
 'use strict';
@@ -19,6 +19,7 @@ const Table = require('cli-table');
 const config = require('./config');
 
 const RUN_URL = 'http://api.hackerrank.com/checker/submission.json';
+const LANG_URL = 'http://api.hackerrank.com/checker/languages.json';
 
 const argv = yargs
   .usage('$0 <command>')
@@ -64,9 +65,11 @@ const argv = yargs
 
     if (argv.list){
       const spinner = ora('Getting languages').start();
-      request('http://api.hackerrank.com/checker/languages.json', (error, response, body) => {
+      request(LANG_URL, (error, response, body) => {
         if (!error && response.statusCode === 200) {
-          var languages = JSON.parse(body), names = languages.languages.names, codes = languages.languages.codes;
+          var languages = JSON.parse(body), 
+              names = languages.languages.names, 
+              codes = languages.languages.codes;
           spinner.stop();
           var table = new Table({
             head: ['Language', 'Code', 'Number'],
