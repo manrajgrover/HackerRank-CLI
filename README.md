@@ -9,9 +9,9 @@ Run the following command
 $ npm install -g hackerrank-cli
 ```
 
-## API KEY
+## API Key
 
-You can get your HackerRank API KEY by visiting [HackerRank API](https://www.hackerrank.com/api) page.
+You can get your HackerRank API Key by visiting [HackerRank API](https://www.hackerrank.com/api) page.
 
 ## Usage
 
@@ -45,7 +45,7 @@ Examples:
 ```
 
 #### Command `config`
-Run `$ sudo hackerrank config` to change configuration of your installation. This includes default language and API KEY.
+Run `$ sudo hackerrank config` to change configuration of your installation. This includes default language and API Key.
 
 ```
 $ sudo hackerrank config [options]
@@ -57,3 +57,7 @@ Options:
 Examples:
   sudo hackerrank config -l
 ```
+
+## License
+
+MIT © [Manraj Singh](https://github.com/ManrajGrover)
