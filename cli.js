@@ -4,7 +4,7 @@
 * @Author: Manraj Singh
 * @Date:   2016-05-26 21:51:20
 * @Last Modified by:   Manraj Singh
-* @Last Modified time: 2016-06-06 14:23:14
+* @Last Modified time: 2016-06-06 15:33:46
 */
 
 'use strict';
@@ -31,7 +31,7 @@ const argv = yargs
       .alias('i', 'input').describe('i', 'Input file path')
       .alias('l', 'language').describe('l', 'Language. Change `config` for default.')
       .alias('o', 'output').describe('o', 'Output file path')
-      .example('$0 run -s A.cpp -i Input00.in -o Output.txt -l CPP')
+      .example('$0 run -s A.cpp -i Input00.in -o Output.txt -l 2')
       .argv;
     const source = fs.readFileSync(argv.source, 'utf8');
     const input = fs.readFileSync(argv.input, 'utf8');
@@ -42,8 +42,9 @@ const argv = yargs
       'api_key': config.api_key,
       'source': source,
       'lang': parseInt(lang),
-      'testcases': '["1", "1"]'
+      'testcases': '["1 999"]'
     };
+    console.log(data);
     request.post({ url : RUN_URL, form : data}, (err,response) => {
       if(err){
         spinner.stop();
@@ -51,8 +52,17 @@ const argv = yargs
       }
       else{
         spinner.stop();
-        fs.writeFileSync(output, response.body, 'utf8');
-        console.log(JSON.stringify(response.body, null, 2));
+        console.log(response.body);
+        const result = JSON.parse(response.body).result;
+        console.log(result);
+        var data = result.stdout[0] === undefined ? "" : result.stdout[0];
+        fs.writeFileSync(output, data, 'utf8');
+        var table = new Table({
+          head: ['Message', 'Memory', 'Time'],
+          colWidths: [20, 20, 20]
+        });
+        table.push([ result["message"], result["memory"][0], result["time"][0] ]);
+        console.log(table.toString());
       }
     });
   })
@@ -86,18 +96,15 @@ const argv = yargs
       });
     }
     else{
-      const questions = [
-        {
+      const questions = [{
           type: 'input',
           name: 'api_key',
           message: 'Enter API Key <leave blank incase unchanged>'
-        },
-        {
+        } , {
           type: 'input',
           name: 'default_lang',
           message: 'Enter default language number (Run `hackerrank config -l` to list codes)'
-        }
-      ];
+      }];
       inquirer.prompt(questions).then((answers) => {
         var obj = config;
         if (answers.api_key !== ''){
