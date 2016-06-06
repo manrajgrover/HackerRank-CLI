@@ -9,6 +9,10 @@ Run the following command
 $ npm install -g hackerrank-cli
 ```
 
+## API KEY
+
+You can get your HackerRank API KEY by visiting [HackerRank API](https://www.hackerrank.com/api) page.
+
 ## Usage
 
 ### Commands available
