@@ -4,7 +4,7 @@
 * @Author: Manraj Singh
 * @Date:   2016-05-26 21:51:20
 * @Last Modified by:   Manraj Singh
-* @Last Modified time: 2016-06-06 00:51:56
+* @Last Modified time: 2016-06-06 14:16:39
 */
 
 'use strict';
@@ -32,22 +32,25 @@ const argv = yargs
       .alias('o', 'output').describe('o', 'Output file path')
       .example('$0 run -s A.cpp -i Input00.in -o Output.txt -l CPP')
       .argv;
+    const source = fs.readFileSync(argv.source, 'utf8');
+    const input = fs.readFileSync(argv.input, 'utf8');
+    const output = argv.output;
     const spinner = ora('Running').start();
-    var lang = config.default_lang;
-    var source = 'print "Hello World"';
+    const lang = argv.language === undefined ? config.default_lang : argv.language;
     var data = {
       'api_key': config.api_key,
       'source': source,
       'lang': parseInt(lang),
       'testcases': '["1", "1"]'
     };
-    request.post({ url : RUN_URL, form : data}, function(err,response){
+    request.post({ url : RUN_URL, form : data}, (err,response) => {
       if(err){
         spinner.stop();
-        console.log('Error');
+        console.log('Error Occured');
       }
       else{
         spinner.stop();
+        fs.writeFileSync(output, response.body, 'utf8');
         console.log(JSON.stringify(response.body, null, 2));
       }
     });
@@ -63,14 +66,14 @@ const argv = yargs
       const spinner = ora('Getting languages').start();
       request('http://api.hackerrank.com/checker/languages.json', (error, response, body) => {
         if (!error && response.statusCode === 200) {
-          var languages = JSON.parse(body), names = languages.languages.names;
+          var languages = JSON.parse(body), names = languages.languages.names, codes = languages.languages.codes;
           spinner.stop();
           var table = new Table({
-            head: ['Language', 'Code'],
-            colWidths: [25, 25]
+            head: ['Language', 'Code', 'Number'],
+            colWidths: [20, 20, 20]
           });
           for(let name in names){
-            table.push([names[name], name]);
+            table.push([names[name], name, codes[name]]);
           }
           console.log(table.toString());
         } else {
@@ -89,7 +92,7 @@ const argv = yargs
         {
           type: 'input',
           name: 'default_lang',
-          message: 'Enter default language code (Run `hackerrank config -l` to list codes)'
+          message: 'Enter default language number (Run `hackerrank config -l` to list codes)'
         }
       ];
       inquirer.prompt(questions).then((answers) => {
@@ -107,24 +110,3 @@ const argv = yargs
   .help('h')
   .alias('h', 'help')
   .argv;
-
-
-// var source = 'print 1';
-
-/* var data = {
-  'api_key': config.api_key,
-  'source': source,
-  'lang': 5,
-  'testcases': '["1"]'
-};
-
-console.log(data);
-
-request.post({ url : RUN_URL, form : data}, function(err,response){
-  if(err){
-    console.log('Error');
-  }
-  else{
-    console.log(response);
-  }
-});*/
