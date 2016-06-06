@@ -25,7 +25,7 @@ Commands:
   config  Change config file
 
 Options:
-  -h, --help  Show help                                                [boolean]
+  -h, --help  Show help                                     [boolean]
 ```
 
 
@@ -35,11 +35,11 @@ Options:
 $ hackerrank run <options>
 
 Options:
-  -h, --help      Show help                                            [boolean]
-  -s, --source    Source Code file path                               [required]
-  -i, --input     Input file path                                     [required]
+  -h, --help      Show help                                 [boolean]
+  -s, --source    Source Code file path                    [required]
+  -i, --input     Input file path                          [required]
   -l, --language  Language. Change `config` for default.
-  -o, --output    Output file path                                    [required]
+  -o, --output    Output file path                         [required]
 
 Examples:
   hackerrank run -s A.cpp -i Input00.in -o Output.txt -l 2
@@ -53,8 +53,8 @@ Run `$ sudo hackerrank config` to change configuration of your installation. Thi
 $ sudo hackerrank config [options]
 
 Options:
-  -h, --help  Show help                                                [boolean]
-  -l, --list  List language and their code                             [boolean]
+  -h, --help  Show help                                     [boolean]
+  -l, --list  List language and their code                  [boolean]
 
 Examples:
   sudo hackerrank config -l
