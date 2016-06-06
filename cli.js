@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 /*
-* @Author: Manraj Singh
+* @Author: ManrajGrover
 * @Date:   2016-05-26 21:51:20
 * @Last Modified by:   Manraj Singh
-* @Last Modified time: 2016-06-06 15:33:46
+* @Last Modified time: 2016-06-06 16:27:19
 */
 
 'use strict';
@@ -33,6 +33,10 @@ const argv = yargs
       .alias('o', 'output').describe('o', 'Output file path')
       .example('$0 run -s A.cpp -i Input00.in -o Output.txt -l 2')
       .argv;
+    if(config.api_key === ""){
+      console.log(chalk.red("Please add API KEY to config. Run `hackerrank config` for this."));
+      process.exit(-1);
+    }
     const source = fs.readFileSync(argv.source, 'utf8');
     const input = fs.readFileSync(argv.input, 'utf8');
     const output = argv.output;
@@ -42,19 +46,21 @@ const argv = yargs
       'api_key': config.api_key,
       'source': source,
       'lang': parseInt(lang),
-      'testcases': '["1 999"]'
+      'testcases': '['+ JSON.stringify(input) +']'
     };
-    console.log(data);
     request.post({ url : RUN_URL, form : data}, (err,response) => {
       if(err){
         spinner.stop();
-        console.log('Error Occured');
+        console.log(chalk.red('Error Occured'));
       }
       else{
         spinner.stop();
-        console.log(response.body);
         const result = JSON.parse(response.body).result;
-        console.log(result);
+        if(result.compilemessage != ''){
+          console.log(chalk.red('Compilation Error'));
+          console.log(chalk.red(result.compilemessage));
+          process.exit(-1);
+        }
         var data = result.stdout[0] === undefined ? "" : result.stdout[0];
         fs.writeFileSync(output, data, 'utf8');
         var table = new Table({
@@ -91,7 +97,7 @@ const argv = yargs
           console.log(table.toString());
         } else {
           spinner.stop();
-          console.log(error);
+          console.log(chalk.red(error));
         }
       });
     }
@@ -113,7 +119,7 @@ const argv = yargs
         if (answers.default_lang !== ''){
           obj.default_lang = answers.default_lang;
         }
-        fs.writeFileSync('config.json', JSON.stringify(obj, null, 2), 'utf8');
+        fs.writeFileSync(__dirname+'/config.json', JSON.stringify(obj, null, 2), 'utf8');
       });
     }
   })
