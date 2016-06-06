@@ -4,7 +4,7 @@
 * @Author: ManrajGrover
 * @Date:   2016-05-26 21:51:20
 * @Last Modified by:   Manraj Singh
-* @Last Modified time: 2016-06-06 16:27:19
+* @Last Modified time: 2016-06-06 17:06:36
 */
 
 'use strict';
@@ -21,6 +21,19 @@ const config = require('./config');
 const RUN_URL = 'http://api.hackerrank.com/checker/submission.json';
 const LANG_URL = 'http://api.hackerrank.com/checker/languages.json';
 
+
+const openIssue = () => {
+  console.log(chalk.yellow('If problem persist, please open an issue at https://github.com/ManrajGrover/HackerRank-CLI/issues .'));
+  process.exit(-1);
+}
+
+const end = () => {
+  console.log(chalk.cyan('Copyright © 2016 Manraj Singh.'))
+  console.log(chalk.green('Powered by HackerRank API (https://www.hackerrank.com/api)'));
+  console.log(chalk.yellow('Support project at https://github.com/ManrajGrover/HackerRank-CLI'));
+  process.exit(-1);
+}
+
 const argv = yargs
   .usage('$0 <command>')
   .command('run', 'Run code on HackerRank server', (yargs) => {
@@ -33,10 +46,13 @@ const argv = yargs
       .alias('o', 'output').describe('o', 'Output file path')
       .example('$0 run -s A.cpp -i Input00.in -o Output.txt -l 2')
       .argv;
+
     if(config.api_key === ""){
-      console.log(chalk.red("Please add API KEY to config. Run `hackerrank config` for this."));
+      console.log(chalk.red("Please add API KEY to config. Run `sudo hackerrank config` for this."));
+      openIssue();
       process.exit(-1);
     }
+
     const source = fs.readFileSync(argv.source, 'utf8');
     const input = fs.readFileSync(argv.input, 'utf8');
     const output = argv.output;
@@ -52,6 +68,7 @@ const argv = yargs
       if(err){
         spinner.stop();
         console.log(chalk.red('Error Occured'));
+        openIssue();
       }
       else{
         spinner.stop();
@@ -69,14 +86,15 @@ const argv = yargs
         });
         table.push([ result["message"], result["memory"][0], result["time"][0] ]);
         console.log(table.toString());
+        end();
       }
     });
   })
   .command('config', 'Change config file', (yargs) => {
     var argv = yargs
-      .usage('Usage: $0 config [options]')
+      .usage('Usage: sudo $0 config [options]')
       .alias('l', 'list').describe('l', 'List language and their code').boolean('l')
-      .example('$0 config -l')
+      .example('sudo $0 config -l')
       .argv;
 
     if (argv.list){
@@ -95,9 +113,11 @@ const argv = yargs
             table.push([names[name], name, codes[name]]);
           }
           console.log(table.toString());
+          end();
         } else {
           spinner.stop();
           console.log(chalk.red(error));
+          openIssue();
         }
       });
     }
@@ -109,7 +129,7 @@ const argv = yargs
         } , {
           type: 'input',
           name: 'default_lang',
-          message: 'Enter default language number (Run `hackerrank config -l` to list codes)'
+          message: 'Enter default language number (Run `sudo hackerrank config -l` to list codes)'
       }];
       inquirer.prompt(questions).then((answers) => {
         var obj = config;
