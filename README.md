@@ -14,7 +14,7 @@ $ npm install -g hackerrank-cli
 ### Commands available
 
 ```
-hackerrank <command>
+$ hackerrank <command>
 
 Commands:
   run     Run code on HackerRank server
@@ -27,7 +27,7 @@ Options:
 #### Command `run`
 
 ```
-Usage: hackerrank run <options>
+$ hackerrank run <options>
 
 Options:
   -h, --help      Show help                                            [boolean]
@@ -41,10 +41,10 @@ Examples:
 ```
 
 #### Command `config`
-Run `sudo hackerrank config` to change configuration of your installation. This includes default language and API KEY.
+Run `$ sudo hackerrank config` to change configuration of your installation. This includes default language and API KEY.
 
 ```
-Usage: sudo hackerrank config [options]
+$ sudo hackerrank config [options]
 
 Options:
   -h, --help  Show help                                                [boolean]
