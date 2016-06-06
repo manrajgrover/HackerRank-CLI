@@ -28,6 +28,7 @@ Options:
   -h, --help  Show help                                                [boolean]
 ```
 
+
 #### Command `run`
 
 ```
@@ -43,6 +44,7 @@ Options:
 Examples:
   hackerrank run -s A.cpp -i Input00.in -o Output.txt -l 2
 ```
+
 
 #### Command `config`
 Run `$ sudo hackerrank config` to change configuration of your installation. This includes default language and API Key.
