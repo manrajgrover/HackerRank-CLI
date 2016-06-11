@@ -63,4 +63,4 @@ Examples:
 
 ## License
 
-MIT © [Manraj Singh](https://github.com/ManrajGrover)
+[MIT](https://github.com/ManrajGrover/HackerRank-CLI/blob/master/LICENSE) © [Manraj Singh](https://github.com/ManrajGrover)
