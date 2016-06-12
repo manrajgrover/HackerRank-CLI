@@ -2,6 +2,10 @@
 [![npm version](https://badge.fury.io/js/hackerrank-cli.svg)](https://www.npmjs.com/package/hackerrank-cli) [![npm](https://img.shields.io/npm/dt/hackerrank-cli.svg?maxAge=2592000)](https://www.npmjs.com/package/hackerrank-cli) ![awesome](https://img.shields.io/badge/awesome-yes-green.svg)
 > CLI for running code using [HackerRank API](https://www.hackerrank.com/api).
 
+## Demo
+
+![Demo](https://raw.githubusercontent.com/ManrajGrover/HackerRank-CLI/master/Assets/how-it-works.gif)
+
 ## Install
 
 Run the following command
