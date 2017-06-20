@@ -1,5 +1,5 @@
 # HackerRank-CLI
-[![Build Status](https://travis-ci.org/ManrajGrover/HackerRank-CLI.svg?branch=master)](https://travis-ci.org/ManrajGrover/HackerRank-CLI) [![npm version](https://badge.fury.io/js/hackerrank-cli.svg)](https://www.npmjs.com/package/hackerrank-cli) [![npm](https://img.shields.io/npm/dt/hackerrank-cli.svg?maxAge=2592000)](https://www.npmjs.com/package/hackerrank-cli) ![awesome](https://img.shields.io/badge/awesome-yes-green.svg)
+[![Build Status](https://travis-ci.org/ManrajGrover/HackerRank-CLI.svg?branch=master)](https://travis-ci.org/ManrajGrover/HackerRank-CLI) [![npm version](https://badge.fury.io/js/hackerrank-cli.svg)](https://www.npmjs.com/package/hackerrank-cli) [![npm](https://img.shields.io/npm/dt/hackerrank-cli.svg)](https://www.npmjs.com/package/hackerrank-cli) ![awesome](https://img.shields.io/badge/awesome-yes-green.svg)
 > CLI for running code using [HackerRank API](https://www.hackerrank.com/api).
 
 ## Demo
@@ -10,7 +10,7 @@
 
 Run the following command
 
-```
+```sh
 $ npm install -g hackerrank-cli
 ```
 
@@ -22,7 +22,7 @@ You can get your HackerRank API Key by visiting [HackerRank API](https://www.hac
 
 ### Commands available
 
-```
+```sh
 $ hackerrank <command>
 
 Commands:
@@ -36,7 +36,7 @@ Options:
 
 #### Command `run`
 
-```
+```sh
 $ hackerrank run <options>
 
 Options:
@@ -54,8 +54,8 @@ Examples:
 #### Command `config`
 Run `$ sudo hackerrank config` to change configuration of your installation. This includes default language and API Key.
 
-```
-$ sudo hackerrank config [options]
+```sh
+$ sudo hackerrank config <options>
 
 Options:
   -h, --help  Show help                                     [boolean]
