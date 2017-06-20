@@ -119,6 +119,7 @@ const argv = yargs
           end();
         } else {
           spinner.stop();
+          console.log(chalk.red(GENERAL_ERR_MSG));
           console.log(chalk.red(error));
           openIssue();
         }
