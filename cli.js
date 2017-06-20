@@ -12,18 +12,27 @@ const Table = require('cli-table');
 const config = require('./config');
 const path = require('path');
 
-const RUN_URL = 'http://api.hackerrank.com/checker/submission.json';
-const LANG_URL = 'http://api.hackerrank.com/checker/languages.json';
+const {
+  RUN_URL,
+  LANG_URL,
+  OPEN_ISSUE_MSG,
+  AUTHOR_MSG,
+  POWERED_BY_MSG,
+  SUPPORT_MSG,
+  API_KEY_ERR_MSG,
+  GENERAL_ERR_MSG,
+  COMPILATION_ERR_MSG
+} = require('./constants');
 
 const openIssue = () => {
-  console.log(chalk.yellow('If problem persist, please open an issue at https://github.com/ManrajGrover/HackerRank-CLI/issues .'));
+  console.log(chalk.yellow(OPEN_ISSUE_MSG));
   process.exit(-1);
 }
 
 const end = () => {
-  console.log(chalk.cyan('Copyright © 2016 Manraj Singh.'))
-  console.log(chalk.green('Powered by HackerRank API (https://www.hackerrank.com/api)'));
-  console.log(chalk.yellow('Support project at https://github.com/ManrajGrover/HackerRank-CLI'));
+  console.log(chalk.cyan(AUTHOR_MSG))
+  console.log(chalk.green(POWERED_BY_MSG));
+  console.log(chalk.yellow(SUPPORT_MSG));
   process.exit(-1);
 }
 
@@ -43,7 +52,7 @@ const argv = yargs
       .argv;
 
     if (config.api_key === '') {
-      console.log(chalk.red('Please add API KEY to config. Run `sudo hackerrank config` for this.'));
+      console.log(chalk.red(API_KEY_ERR_MSG));
       openIssue();
       process.exit(-1);
     }
@@ -62,13 +71,13 @@ const argv = yargs
     request.post({url: RUN_URL, form: data}, (err, response) => {
       if (err) {
         spinner.stop();
-        console.log(chalk.red('Error Occured'));
+        console.log(chalk.red(GENERAL_ERR_MSG));
         openIssue();
       } else {
         spinner.stop();
         const result = JSON.parse(response.body).result;
         if (result.compilemessage !== '') {
-          console.log(chalk.red('Compilation Error'));
+          console.log(chalk.red(COMPILATION_ERR_MSG));
           console.log(chalk.red(result.compilemessage));
           process.exit(-1);
         }
