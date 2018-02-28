@@ -4,7 +4,7 @@
 
 ## Demo
 
-![Demo](https://raw.githubusercontent.com/ManrajGrover/HackerRank-CLI/master/Assets/how-it-works.gif)
+![Demo](https://raw.githubusercontent.com/ManrajGrover/HackerRank-CLI/master/assets/demo.gif)
 
 ## Install
 
