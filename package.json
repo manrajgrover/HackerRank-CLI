@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ManrajGrover/HackerRank-CLI.git"
+    "url": "git+https://github.com/manrajgrover/HackerRank-CLI.git"
   },
   "keywords": [
     "hackerrank",
@@ -25,9 +25,9 @@
   "author": "Manraj Singh <manrajsinghgrover@gmail.com> (http://manrajsingh.in)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ManrajGrover/HackerRank-CLI/issues"
+    "url": "https://github.com/manrajgrover/HackerRank-CLI/issues"
   },
-  "homepage": "https://github.com/ManrajGrover/HackerRank-CLI#readme",
+  "homepage": "https://github.com/manrajgrover/HackerRank-CLI#readme",
   "dependencies": {
     "chalk": "1.1.3",
     "cli-table": "0.3.1",

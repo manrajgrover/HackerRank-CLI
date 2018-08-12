@@ -1,10 +1,10 @@
 # HackerRank-CLI
-[![Build Status](https://travis-ci.org/ManrajGrover/HackerRank-CLI.svg?branch=master)](https://travis-ci.org/ManrajGrover/HackerRank-CLI) [![npm version](https://badge.fury.io/js/hackerrank-cli.svg)](https://www.npmjs.com/package/hackerrank-cli) [![npm](https://img.shields.io/npm/dt/hackerrank-cli.svg)](https://www.npmjs.com/package/hackerrank-cli) ![awesome](https://img.shields.io/badge/awesome-yes-green.svg)
+[![Build Status](https://travis-ci.org/manrajgrover/HackerRank-CLI.svg?branch=master)](https://travis-ci.org/manrajgrover/HackerRank-CLI) [![npm version](https://badge.fury.io/js/hackerrank-cli.svg)](https://www.npmjs.com/package/hackerrank-cli) [![npm](https://img.shields.io/npm/dt/hackerrank-cli.svg)](https://www.npmjs.com/package/hackerrank-cli) ![awesome](https://img.shields.io/badge/awesome-yes-green.svg)
 > CLI for running code using [HackerRank API](https://www.hackerrank.com/api).
 
 ## Demo
 
-![Demo](https://raw.githubusercontent.com/ManrajGrover/HackerRank-CLI/master/assets/demo.gif)
+![Demo](https://raw.githubusercontent.com/manrajgrover/HackerRank-CLI/master/assets/demo.gif)
 
 ## Install
 
@@ -70,7 +70,7 @@ Examples:
 Run:
 
 ```sh
-$ git clone https://github.com/ManrajGrover/HackerRank-CLI.git
+$ git clone https://github.com/manrajgrover/HackerRank-CLI.git
 $ cd HackerRank-CLI
 $ npm link
 ```
@@ -85,4 +85,4 @@ $ npm run lint
 
 ## License
 
-[MIT](https://github.com/ManrajGrover/HackerRank-CLI/blob/master/LICENSE) © [Manraj Singh](https://github.com/ManrajGrover)
+[MIT](https://github.com/manrajgrover/HackerRank-CLI/blob/master/LICENSE) © [Manraj Singh](https://github.com/manrajgrover)

@@ -1,6 +1,6 @@
 # How to contribute?
 
-Please go through [project issues](https://github.com/ManrajGrover/HackerRank-CLI/issues) and [pull requests](https://github.com/ManrajGrover/HackerRank-CLI/pulls) to check for duplicates before picking up an issue.
+Please go through [project issues](https://github.com/manrajgrover/HackerRank-CLI/issues) and [pull requests](https://github.com/manrajgrover/HackerRank-CLI/pulls) to check for duplicates before picking up an issue.
 
 ## Steps to contribute
 
